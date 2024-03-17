@@ -7,14 +7,7 @@ const COMPLETE_BTN_ID = "complete-btn-id"
 const DELETE_BTN_ID = "delete-btn-id"
 const TODO_ITEM_ID = "todo-item-id"
 const CHECK_INPUT_ID = "check-input-id"
-
-
-// create global array 
 const todoItems = [];
-
-// create unique id for all elements
-
-
 
 window.onload = function() {
     loadTasks()
@@ -98,20 +91,11 @@ function completeTask() {
     document.getElementById(CHECK_INPUT_ID).parentElement.classList.toggle("checked");
 }
 
-        /* if(document.getElementById(CHECK_INPUT_ID).checked) {  
-            document.getElementById(TODO_ITEM_ID).classList.toggle("checked")
-        } else {
-            document.getElementById(TODO_ITEM_ID).classList.toggle("checked")
-        } */
-
-
-
 function removeTask(e) {
         e.target.previousElementSibling.remove();
         e.target.nextElementSibling.remove(); 
         e.target.remove();
 } 
-
 
 function saveTasks() {
     localStorage.setItem("data", listContainer.innerHTML);
