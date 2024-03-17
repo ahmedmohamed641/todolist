@@ -120,3 +120,4 @@ function saveTasks() {
 function loadTasks() {
         listContainer.innerHTML = localStorage.getItem("data");
 }
+
