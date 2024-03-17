@@ -84,8 +84,6 @@ function editTask() {
         document.getElementById(TODO_ITEM_ID).contentEditable = toggleText;
 }
 
-
-
 function completeTask() {
     document.getElementById(CHECK_INPUT_ID).classList.toggle("checked");
     document.getElementById(CHECK_INPUT_ID).parentElement.classList.toggle("checked");
