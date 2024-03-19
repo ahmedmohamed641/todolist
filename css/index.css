@@ -110,19 +110,19 @@
     box-shadow: -1px 5px 20px 10px rgba(157, 162, 235, 0.3);
     -webkit-box-shadow: -1px 5px 20px 10px rgba(157, 162, 235, 0.3);
     -moz-box-shadow: -1px 5px 20px 10px rgba(157, 162, 235, 0.3);
-    gap: 2rem;
   }
   
   ul li {
-    display: flex;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   padding-left: 4rem;
   padding-right: 2.4rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1.2rem;
   color: #9394a4;
   border-bottom: 0.1rem solid var(--color-very-light-grayish-blue);
+  padding-top: 0;
   }
 
   ul li:first-child {
@@ -140,7 +140,7 @@
     cursor: pointer;
     background-color: rgb(255, 255, 255);
     position: relative;
-    left: 35%;
+    left:15px ;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -150,7 +150,8 @@
     width: 25px;
     padding: 0px;
     flex: none;
-    position: absolute;
+    position: relative;
+    top:-40px;
   }
 
   .checkbox-input:after {
@@ -158,7 +159,6 @@
     font-family: "font Awesome 5 free";
     width: 100px;
     color: var(--color-very-light-gray);
-    z-index: 1000;
     font-size: 1.1rem;
     font-weight: 900;
     display: none;
@@ -207,8 +207,8 @@
   
   ul span {
     position: relative;
-    right: -445px;
-    top: -50px;
+    left: 446px;
+    bottom: 77px;
     font-size: 30px;
     background-image: linear-gradient(
         to bottom right,
@@ -217,10 +217,10 @@
         color:var(--color-very-light-gray);
     border-radius: 25%;
     text-align: center;
-    padding: -20px 20px -10px 120px;
     width: 35px;
-    height: 35px;
     display: block;
+    margin-top: -2rem;
+
   }
   
   ul span:hover {
@@ -230,8 +230,8 @@
   
   .edit-button {
     position: relative;
-    right: -385px;
-    top: -85px;
+    right: -390px;
+    bottom: 75px;
     width: 35px;
     height: 35px;
     font-size: 30px;
@@ -251,15 +251,6 @@
   .edit-button:hover {
     cursor: pointer;
     color: var(--color-very-dark-grayish-blue);
-  }
-
-  .list-box {
-    background-color: #1aa41a;
-    width: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: #dbdada;
   }
   
   /*animations*/

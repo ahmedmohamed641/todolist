@@ -33,30 +33,23 @@ window.addEventListener('click', function(e) {
   saveTasks()
 })
 
-let id = 0;
 
 function addTask() {  
     if (inputBox.value === "") {
         return;
       }  
-      
-      id++;
       const item = document.createElement("li");
       item.innerHTML = inputBox.value;
-      item.setAttribute("task", `${id}`);
       listContainer.appendChild(item);
-      todoItems.push({
-        id: id,
-        listItem: item
-      });
       item.setAttribute("id", "todo-item-id");
       item.setAttribute("class", "animate-left");
 
-      const deleteButton = document.createElement("span");
-      deleteButton.innerHTML = "\u00d7";
-      listContainer.appendChild(deleteButton);
-      deleteButton.classList.add("animate-opacity");
-      deleteButton.setAttribute("id", "delete-btn-id")
+      const checkInput = document.createElement("input")
+      checkInput.type = "checkbox"
+      listContainer.appendChild(checkInput)
+      checkInput.setAttribute("class", "checkbox-input")
+      checkInput.setAttribute("id", "check-input-id")
+      checkInput.classList.add("animate-opacity-delay");
 
       const editButton = document.createElement("div");
       editButton.innerHTML = "&#9998;";
@@ -65,12 +58,11 @@ function addTask() {
       editButton.setAttribute("class", "edit-button");
       editButton.classList.add("animate-opacity");
 
-      const checkInput = document.createElement("input")
-      checkInput.type = "checkbox"
-      item.appendChild(checkInput)
-      checkInput.setAttribute("class", "checkbox-input")
-      checkInput.setAttribute("id", "check-input-id")
-      checkInput.classList.add("animate-opacity-delay");
+      const deleteButton = document.createElement("span");
+      deleteButton.innerHTML = "\u00d7";
+      listContainer.appendChild(deleteButton);
+      deleteButton.classList.add("animate-opacity");
+      deleteButton.setAttribute("id", "delete-btn-id")
 
     saveTasks()
     inputBox.value = "";
@@ -79,19 +71,20 @@ function addTask() {
 
   let toggleText = false;
 
-function editTask() {
+function editTask(e) {
         toggleText = !toggleText;
-        document.getElementById(TODO_ITEM_ID).contentEditable = toggleText;
+        e.target.contentEditable = false
+        e.target.previousElementSibling.previousElementSibling.contentEditable = toggleText;
 }
 
-function completeTask() {
-    document.getElementById(CHECK_INPUT_ID).classList.toggle("checked");
-    document.getElementById(CHECK_INPUT_ID).parentElement.classList.toggle("checked");
+function completeTask(e) {
+  e.target.previousElementSibling.classList.toggle("checked")
 }
 
 function removeTask(e) {
+      e.target.previousElementSibling.previousElementSibling.previousElementSibling.remove();
+       e.target.previousElementSibling.previousElementSibling.remove();
         e.target.previousElementSibling.remove();
-        e.target.nextElementSibling.remove(); 
         e.target.remove();
 } 
 
@@ -103,3 +96,4 @@ function loadTasks() {
         listContainer.innerHTML = localStorage.getItem("data");
 }
 
+localStorage.clear()
