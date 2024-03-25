@@ -8,8 +8,6 @@ const CHECK_INPUT_ID = 'checkBtn';
 const todoItems = [];
 let index = 0;
 
-
-
 addTaskBtn.addEventListener('click', addTask)
 
 window.addEventListener('click', function (e) {
@@ -29,18 +27,18 @@ window.addEventListener('click', function (e) {
 });
 
 function addTask() {
-    if (inputBox.value === "") {
-     return;
-    }
+ if (inputBox.value === "") {
+  return;
+ }
 
-index++;
+ index++;
+
  const listItem = document.createElement('li');
  listItem.setAttribute('data-index', index);
  listItem.innerHTML = createTodo(inputBox.value);
  todoContainer.appendChild(listItem);
  listItem.setAttribute('id', "todoItem" )
  listItem.classList.add('animate-left')
-
  inputBox.value = '';
 
  todoItems.push({
@@ -54,12 +52,13 @@ let toggleText = false;
 function editTask(e) {
  toggleText = !toggleText;
  const todo = getTodoItem(e.target.parentElement.parentElement.getAttribute('data-index'));
- todo.element.contentEditable = toggleText;
- e.target.contentEditable = false
+ const children = Array.from(todo.element.children)
+ const p = children[0].querySelector("#todo-text")
+ p.contentEditable = toggleText;
 }
 
 function completeTask(e) {
-    e.target.nextElementSibling.classList.toggle("checked")
+ e.target.nextElementSibling.classList.toggle("checked")
 }
 
 function removeTask(e) {
@@ -70,14 +69,13 @@ function removeTask(e) {
 
 function getTodoItem(id) {
  const todo = todoItems.find((el) => el.id === id);
-
  return todo;
 }
 
 function createTodo(text) {
  return ` <span id="checkboxWrapper">
           <input class="checkbox-input" id="checkBtn" type="checkbox">
-          <p>${text}</p>
+          <p id="todo-text">${text}</p>
        </span>
 
       <div id="buttonsConatiner">
@@ -86,3 +84,8 @@ function createTodo(text) {
       </div>
     `;
 }
+
+
+/*  1-set maximum charchter length
+    2- focus on input*/
+    
