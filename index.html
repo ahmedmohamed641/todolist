@@ -3,27 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <script src="javascript/index.js" defer></script>
+    <title>Todo App</title>
+    <link rel="stylesheet" href="css/index.css">
     <script src="https://kit.fontawesome.com/498c7dcb2d.js" crossorigin="anonymous"></script>
+    <script src="javascript/index.js" defer> </script> 
 </head>
-<body>
-    <section class="container">
+
+    <body>
+
         <header>
-        <section class="header"><h1 class="animate-leftreverse">TODO</h1> <img class="animate-bounce" src="img/icons8-crescent-moon-50.png" alt=""></section>
-         </header>
-        <div class="todo-app">
-            <div class="row animate-right">
-                <input class="animate-left" type="text" id="input-box" placeholder="Add your text">
-                <button id="add-task-btn" class="main-button animate-left">Add</button>
-            </div>
-            <ul id="list-container">
-               <!--  <li class="checked">Task 1</li>
-                <li>Task 2</li>
-                <li>Task 3</li> -->
-            </ul>
-        </div>
-    </section>
-</body>
+
+            <section class="sub-header">
+                <h1>Todo app</h1>
+                <figure>
+                  <img src="img/icons8-crescent-moon-50.png" alt="crescent-moon">
+                </figure>
+              </section>
+              
+            </header>
+              
+            <main>
+                
+                <section class="row">
+                  <input type="text" id="inputBox" placeholder="Add your text">
+                  <button id="addTaskBtn" class="main-button">Add</button>
+                </section>
+              
+                <section id="todoContainer">
+              
+                  <!--      <section id="todoItem">
+              
+                              <span id="checkboxWrapper">
+                                  <input class="checkbox-input" id="checkBtn" type="checkbox">
+                                  <p>1</p>
+                              </span>
+              
+                              <div id="buttonsConatiner">
+                                  <button class="edit-btn" id="editBtn"></button>
+                                  <button id="deleteBtn"></button>
+                              </div>
+              
+                          </section> -->
+              
+                </section>
+            </main>
+    </body>
 </html>

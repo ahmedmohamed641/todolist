@@ -1,99 +1,88 @@
-const inputBox = document.getElementById("input-box");
-const listContainer = document.getElementById("list-container")
-const addTaskButton = document.getElementById('add-task-btn')
-const ADD_TASK_BTN = "add-task-btn"
-const EDIT_BTN_ID = "edit-btn-id"
-const COMPLETE_BTN_ID = "complete-btn-id"
-const DELETE_BTN_ID = "delete-btn-id"
-const TODO_ITEM_ID = "todo-item-id"
-const CHECK_INPUT_ID = "check-input-id"
+const addTaskBtn = document.getElementById('addTaskBtn')
+const todoContainer = document.getElementById("todoContainer")
+const inputBox = document.getElementById('inputBox')
+const ADD_TASK_BTN = 'addTaskBtn';
+const EDIT_BTN_ID = 'editBtn';
+const DELETE_BTN_ID = 'deleteBtn';
+const CHECK_INPUT_ID = 'checkBtn';
 const todoItems = [];
-
-window.onload = function() {
-    loadTasks()
-  }
-
-addTaskButton.addEventListener('click', addTask)
-
-window.addEventListener('click', function(e) {
-  const id = e.target.id;
-
-  switch(id) { 
-    case EDIT_BTN_ID:
-        editTask(e)
-      break;
-    case CHECK_INPUT_ID:
-        completeTask(e)
-      break;
-    case DELETE_BTN_ID:
-        removeTask(e)
-      break;
-  }
-  
-  saveTasks()
-})
+let index = 0;
 
 
-function addTask() {  
+
+addTaskBtn.addEventListener('click', addTask)
+
+window.addEventListener('click', function (e) {
+ const id = e.target.id;
+
+ switch (id) {
+  case EDIT_BTN_ID:
+   editTask(e);
+   break;
+  case CHECK_INPUT_ID:
+   completeTask(e);
+   break;
+  case DELETE_BTN_ID:
+   removeTask(e);
+   break;
+ }
+});
+
+function addTask() {
     if (inputBox.value === "") {
-        return;
-      }  
-      const item = document.createElement("li");
-      item.innerHTML = inputBox.value;
-      listContainer.appendChild(item);
-      item.setAttribute("id", "todo-item-id");
-      item.setAttribute("class", "animate-left");
+     return;
+    }
 
-      const checkInput = document.createElement("input")
-      checkInput.type = "checkbox"
-      listContainer.appendChild(checkInput)
-      checkInput.setAttribute("class", "checkbox-input")
-      checkInput.setAttribute("id", "check-input-id")
-      checkInput.classList.add("animate-opacity-delay");
+index++;
+ const listItem = document.createElement('li');
+ listItem.setAttribute('data-index', index);
+ listItem.innerHTML = createTodo(inputBox.value);
+ todoContainer.appendChild(listItem);
+ listItem.setAttribute('id', "todoItem" )
+ listItem.classList.add('animate-left')
 
-      const editButton = document.createElement("div");
-      editButton.innerHTML = "&#9998;";
-      listContainer.appendChild(editButton);
-      editButton.setAttribute("id", "edit-btn-id");
-      editButton.setAttribute("class", "edit-button");
-      editButton.classList.add("animate-opacity");
+ inputBox.value = '';
 
-      const deleteButton = document.createElement("span");
-      deleteButton.innerHTML = "\u00d7";
-      listContainer.appendChild(deleteButton);
-      deleteButton.classList.add("animate-opacity");
-      deleteButton.setAttribute("id", "delete-btn-id")
+ todoItems.push({
+  element: listItem,
+  id: String(index),
+ });
+}
 
-    saveTasks()
-    inputBox.value = "";
-  }
-  console.log(todoItems)
-
-  let toggleText = false;
+let toggleText = false;
 
 function editTask(e) {
-        toggleText = !toggleText;
-        e.target.contentEditable = false
-        e.target.previousElementSibling.previousElementSibling.contentEditable = toggleText;
+ toggleText = !toggleText;
+ const todo = getTodoItem(e.target.parentElement.parentElement.getAttribute('data-index'));
+ todo.element.contentEditable = toggleText;
+ e.target.contentEditable = false
 }
 
 function completeTask(e) {
-  e.target.previousElementSibling.classList.toggle("checked")
+    e.target.nextElementSibling.classList.toggle("checked")
 }
 
 function removeTask(e) {
-      e.target.previousElementSibling.previousElementSibling.previousElementSibling.remove();
-       e.target.previousElementSibling.previousElementSibling.remove();
-        e.target.previousElementSibling.remove();
-        e.target.remove();
-} 
-
-function saveTasks() {
-    localStorage.setItem("data", listContainer.innerHTML);
+ const todo = getTodoItem(e.target.parentElement.parentElement.getAttribute('data-index'));
+ todo.element.remove();
+ todoItems.splice(todoItems.indexOf(todo), 1);
 }
 
-function loadTasks() {
-        listContainer.innerHTML = localStorage.getItem("data");
+function getTodoItem(id) {
+ const todo = todoItems.find((el) => el.id === id);
+
+ return todo;
 }
 
-localStorage.clear()
+function createTodo(text) {
+ return ` <span id="checkboxWrapper">
+          <input class="checkbox-input" id="checkBtn" type="checkbox">
+          <p>${text}</p>
+       </span>
+
+      <div id="buttonsConatiner">
+         <button class="edit-btn" id="editBtn"> &#9998</button>
+          <button id="deleteBtn"> \u00d7</button>
+      </div>
+    `;
+}
