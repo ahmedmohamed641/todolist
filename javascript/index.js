@@ -55,6 +55,7 @@ function editTask(e) {
  const children = Array.from(todo.element.children)
  const p = children[0].querySelector("#todo-text")
  p.contentEditable = toggleText;
+ p.focus()
 }
 
 function completeTask(e) {
@@ -85,7 +86,4 @@ function createTodo(text) {
     `;
 }
 
-
-/*  1-set maximum charchter length
-    2- focus on input*/
     
